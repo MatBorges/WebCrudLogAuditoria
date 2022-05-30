@@ -53,12 +53,12 @@ namespace WebCrudLogAuditoria.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Senha")]
+            [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirme a senha")]
-            [Compare("Senha", ErrorMessage = "A senha e a confirmação da senha não coincidem.")]
+            [Display(Name = "ConfirmPassword")]
+            [Compare("Password", ErrorMessage = "A senha e a confirmação da senha não coincidem.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -88,7 +88,7 @@ namespace WebCrudLogAuditoria.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirme seu email",
+                    await _emailSender.SendEmailAsync(Input.Email, "ConfirmEmail",
                         $"Please confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
